@@ -1,3 +1,4 @@
+*.json
 # Logs
 logs
 *.log
@@ -102,3 +103,6 @@ dist
 
 # TernJS port file
 .tern-port
+
+# secrets.js (API KEY)
+src/secrets.js
