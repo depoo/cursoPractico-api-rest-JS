@@ -14,7 +14,7 @@ async function getTraidingMoviesPreview() {
 
     const movies = data.results;
     movies.forEach(movie => {
-        const trendingPreviewMoviesContainer = document.querySelector('#trendingPreview .trendingPreview-movieList') // selecionando el id "trendingPreview" y la clase "trendingPreview-movieList" que esta en html
+        const trendingMoviesPreviewList = document.querySelector('#trendingPreview .trendingPreview-movieList') // selecionando el id "trendingPreview" y la clase "trendingPreview-movieList" que esta en html
 
         const movieContainer = document.createElement('div'); //creando una etiqueta div
         movieContainer.classList.add('movie-container'); // creando una clase "movie-container" para la etiqueta div(movieContainer)
@@ -28,7 +28,7 @@ async function getTraidingMoviesPreview() {
         ); // creando un atributo "src" para la etiqueta img con image que tengan un ancho de 300 px que estamos traendo desde la API
 
         movieContainer.appendChild(movieImg); //movieImg ahora estara dentro de movieContainer
-        trendingPreviewMoviesContainer.appendChild(movieContainer) //movieContainer ahora estara dentro de trendingPreviewMoviesContainer
+        trendingMoviesPreviewList.appendChild(movieContainer) //movieContainer ahora estara dentro de trendingMoviesPreviewList
     });
 }
 
@@ -37,7 +37,7 @@ async function getCategoriesPreview() {
 
   const categories = data.genres;
   categories.forEach(category => {
-      const previewCategoriesContainer = document.querySelector('#categoriesPreview .categoriesPreview-list') // selecionando el id "categoriesPreview" y la clase "categoriesPreview-list" que esta en html
+      const categoriesPreviewList = document.querySelector('#categoriesPreview .categoriesPreview-list') // selecionando el id "categoriesPreview" y la clase "categoriesPreview-list" que esta en html
 
       const categoryContainer = document.createElement('div'); //creando una etiqueta div
       categoryContainer.classList.add('category-container'); // creando una clase "categorie-container" para la etiqueta div(movieContainer)
@@ -49,6 +49,6 @@ async function getCategoriesPreview() {
 
       categoryTitle.appendChild(categoryTitleText); //categoryTitleText ahora estara dentro de categoryTitle
       categoryContainer.appendChild(categoryTitle);//categoryTitle ahora estara dentro de categoryContainer
-      previewCategoriesContainer.appendChild(categoryContainer);//categoryContainer ahora estara dentro de previewCategoriesContainer
+      categoriesPreviewList.appendChild(categoryContainer);//categoryContainer ahora estara dentro de categoriesPreviewList
   });
 }
