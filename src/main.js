@@ -11,11 +11,11 @@ const apiAxios= axios.create({
 
 async function getTraidingMoviesPreview() {
     const {data} = await apiAxios('trending/movie/day'); // traendo la apiKey desde otro archivo js, y hago una destructuracion con data para no hacer un res.json
-
     const movies = data.results;
-    movies.forEach(movie => {
-        const trendingMoviesPreviewList = document.querySelector('#trendingPreview .trendingPreview-movieList') // selecionando el id "trendingPreview" y la clase "trendingPreview-movieList" que esta en html
 
+    trendingMoviesPreviewList.innerHTML = ""; /* No se duplicara la lista de peliculas en tendencia al regresar a la vista principal */
+
+    movies.forEach(movie => {
         const movieContainer = document.createElement('div'); //creando una etiqueta div
         movieContainer.classList.add('movie-container'); // creando una clase "movie-container" para la etiqueta div(movieContainer)
 
@@ -34,11 +34,11 @@ async function getTraidingMoviesPreview() {
 
 async function getCategoriesPreview() {
   const { data } = await apiAxios('genre/movie/list'); // traendo la apiKey desde otro archivo js pero traendo las categorias de cada pelicula
-
   const categories = data.genres;
-  categories.forEach(category => {
-      const categoriesPreviewList = document.querySelector('#categoriesPreview .categoriesPreview-list') // selecionando el id "categoriesPreview" y la clase "categoriesPreview-list" que esta en html
 
+  categoriesPreviewList.innerHTML= "";/* No se duplicaran la lista categorias al regresar a la vista principal */
+
+  categories.forEach(category => {
       const categoryContainer = document.createElement('div'); //creando una etiqueta div
       categoryContainer.classList.add('category-container'); // creando una clase "categorie-container" para la etiqueta div(movieContainer)
 
