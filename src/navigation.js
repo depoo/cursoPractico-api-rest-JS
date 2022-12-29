@@ -22,6 +22,10 @@ function navigator() {
     }else{
         homePage();
     }
+
+    /* Esta parte del codigo ayuda a que cuando cambiemos de vista siempre se inicie en la parte superior de cada pagina */
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
 }
 
 function homePage() {
