@@ -60,6 +60,15 @@ function categoriesPage() {
     categoriesPreviewSection.classList.add('inactive') /*Agregando la clase "inactive" a constante categoriesPreviewSection*/
     genericSection.classList.remove('inactive') /*Removiendo una clase "inactive" a constante genericSection*/
     movieDetailSection.classList.add('inactive')/*Agregando una clase "inactive" a constante movieDetailSection*/
+
+    /* Destructurando  el location.hash con el metodo split() para quedarnos solos con el "id" y el "nombre de la categoria" de peliculas*/
+    const [_, categoryInfo] = location.hash.split('=');
+    //    [id, name]
+    const [categoryId, categoryName] = categoryInfo.split('-')
+
+    headerCategoryTitle.innerHTML = categoryName; /* Cuando ingresamos a cualquier categoria de peliculas, el nombre de la categoria se mostrara en la parte superior de todas las peliculas pertenecientes a esa categoria*/
+
+    getMoviesByCategory(categoryId); /* Esta funcion lo puedo encontrar en el archivo main.js */
 }
 function movieDetails() {
     console.log('Movie!!');
