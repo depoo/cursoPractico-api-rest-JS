@@ -1,9 +1,10 @@
 /*Agregando search boton para que cuando hagamos click en el boton nos diriga a la vista de busqueda */
-searchFormBtn.addEventListener('click', ()=> location.hash='#search=')
+searchFormBtn.addEventListener('click', ()=> location.hash= '#search=' + searchFormInput.value) /* en esta modificacion cumple como buscador de peliculas */
+
 /*Agregando trending boton para que cuando hagamos click en el boton nos diriga a la vista de tendencias */
 trendingBtn.addEventListener('click', ()=> location.hash='#trends=')
 /*Agregando trending boton para que cuando hagamos click en el boton nos diriga a la vista principal que es Home */
-arrowBtn.addEventListener('click', ()=> location.hash='#home')
+arrowBtn.addEventListener('click', ()=> location.hash=history.back()) /* history.back nos devolvera la pagina anterior en la que estuvimos primero */
 
 window.addEventListener('DOMContentLoaded', navigator, false);
 window.addEventListener('hashchange', navigator, false);
@@ -100,13 +101,17 @@ function searchPage() {
     arrowBtn.classList.remove('inactive');/* Removiendo la clase "inactive" a constante arrowBtn*/
     arrowBtn.classList.remove('header-arrow--white'); /*Removiendo la clase "header-arrow--white" a constante arrowBtn*/
     headerTitle.classList.add('inactive'); /*Agregando la clase "inactive" a constante headerTitle si es que ya lo tiene en el html*/
-    headerCategoryTitle.classList.remove('inactive') /* Removiendo una clase "inactive" a constante headerCategoryTitle*/
+    headerCategoryTitle.classList.add('inactive') /* Añadiendo una clase "inactive" a constante headerCategoryTitle para que cuando se busque la pelicula no aparesca en la parte superior que categoria de pelicula es.*/
     searchForm.classList.remove('inactive'); /*Removiendo la clase "inactive" a constante searForm*/
 
     trendingPreviewSection.classList.add('inactive') /*Agregando la clase "inactive" a constante trendingPreviewSection*/
     categoriesPreviewSection.classList.add('inactive') /*Agregando la clase "inactive" a constante categoriesPreviewSection*/
     genericSection.classList.remove('inactive') /*Removiendo una clase "inactive" a constante genericSection*/
     movieDetailSection.classList.add('inactive')/*Agregando una clase "inactive" a constante movieDetailSection*/
+
+    /* Destructurando  el location.hash con el metodo split() para quedarnos solos con el "id" y el "nombre de la pelicula*/
+    const [_, query] = location.hash.split('=');
+    getMoviesBySearch(query) /*Esta funcion la encontraras en el documento main.js */
 }
 function trendsPage() {
     console.log('trends!!');
@@ -124,4 +129,7 @@ function trendsPage() {
     categoriesPreviewSection.classList.add('inactive') /*Agregando la clase "inactive" a constante categoriesPreviewSection*/
     genericSection.classList.remove('inactive') /*Removiendo una clase "inactive" a constante genericSection*/
     movieDetailSection.classList.add('inactive')/*Agregando una clase "inactive" a constante movieDetailSection*/
+
+    headerCategoryTitle.innerHTML = 'Tendencias'
+    getTraidingMovies()
 }

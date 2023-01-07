@@ -63,11 +63,31 @@ async function getTraidingMoviesPreview() {
     createMovies(movies, trendingMoviesPreviewList) /* Reutilizando la funcion createMovies */
 }
 
+async function getTraidingMovies() {
+    const {data} = await apiAxios('trending/movie/day'); // traendo la apiKey desde otro archivo js, y hago una destructuracion con data para no hacer un res.json
+    const movies = data.results;
+
+    createMovies(movies, genericSection) /* Reutilizando la funcion createMovies */
+}
+
 async function getMoviesByCategory(id) {
     // Este endpoint "discover/movie?" que estamos traendo desde la APIKey ayudara a organizar que peliculas pertenecen a tal categoria de pelicula con su respectivo query parameter.
     const {data} = await apiAxios('discover/movie?', {
         params:{
             with_genres: id,
+        },
+    });
+    const movies = data.results;
+
+    createMovies(movies, genericSection); /* Reutilizando la funcion createMovies */
+ 
+}
+
+async function getMoviesBySearch(query) {
+    // Este endpoint "search/movie" que estamos traendo desde la APIKey ayudara a mostrarnos todas las peliculas que indican con el mismo nombre.
+    const {data} = await apiAxios('search/movie', {
+        params:{
+            query,
         },
     });
     const movies = data.results;
