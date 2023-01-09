@@ -92,6 +92,16 @@ async function getMovieById(id) {
     movieDetailScore.textContent = movie.vote_average; /* Aparecera el promedio de la pelicula */
 
     createCategories(movie.genres, movieDetailCategoriesList) /* Reutilizando la funcion createCategories, Esta funcion mostrara cuando estemos dentro de cada pelicula a que categoria pertenece */
+
+    getRelatedMoviesId(id)/* Esta funcion se basara en mostrar peliculas similares a la pelicula que hayamos seleccionado*/
+}
+
+async function getRelatedMoviesId(id){
+    const { data } = await apiAxios(`movie/${id}/similar`) /* endpoint que ayuda a traer peliculas recomendadas acorde a la pelicula que hayamos seleccionado */
+    const relatedMovies = data.results; /* Se crea una variable para almacenar las peliculas recomendadas */
+
+    createMovies(relatedMovies, relatedMoviesContainer);/* en esta funcion mostrara las pelicunlas en relatedMoviesContainer(es una id que esta en node.js) para que muestre las peliculas similares*/
+    relatedMoviesContainer.scrollTo(0, 0); /* Es para que el scroll de peliculas similares se mantenga en el incio del scroll */
 }
 
 async function getMoviesByCategory(id) {
