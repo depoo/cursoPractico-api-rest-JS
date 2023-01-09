@@ -91,6 +91,10 @@ function movieDetails() {
     categoriesPreviewSection.classList.add('inactive') /*Agregando la clase "inactive" a constante categoriesPreviewSection*/
     genericSection.classList.add('inactive') /*Agregando una clase "inactive" a constante genericSection*/
     movieDetailSection.classList.remove('inactive')/*Removiendo una clase "inactive" a constante movieDetailSection*/
+
+    /* Destructurando  el location.hash con el metodo split() para quedarnos solos con el "id de la pelicula*/
+    const [_, movieId] = location.hash.split('=');
+    getMovieById(movieId)
 }
 function searchPage() {
     console.log('search!!');

@@ -17,6 +17,9 @@ function createMovies(movies, container) {
     movies.forEach(movie => {
         const movieContainer = document.createElement('div'); //creando una etiqueta div
         movieContainer.classList.add('movie-container'); // creando una clase "movie-container" para la etiqueta div(movieContainer)
+        movieContainer.addEventListener('click', () =>{
+            location.hash = '#movie=' + movie.id;   /*Este evento de click sirve para que cuando hagamos click en culquier pelicula que se muestra en el carrucel de tendencias nos rediriga a esa pelicula con toda sus descripciones */
+        })
 
         const movieImg = document.createElement('img') // creando una etiqueta img
         movieImg.classList.add('movie-img') // creando una clase "movie-img" para la etiqueta img(movieImg)
@@ -68,6 +71,27 @@ async function getTraidingMovies() {
     const movies = data.results;
 
     createMovies(movies, genericSection) /* Reutilizando la funcion createMovies */
+}
+
+/*Esta funcion cumple mostrar todo los detalletes de una pelicula */
+async function getMovieById(id) {
+    const {data: movie} = await apiAxios('movie/' + id); // traendo la apiKey desde otro archivo js, y hago una destructuracion con data para no hacer un res.json al final este "endpoint + el parametro" lo que hara es que traiga todo los detalles de una pelicula, ya que la funcion se esta utilizando en el archivo navigation.js
+
+    const movieImgUrl = 'https://image.tmdb.org/t/p/w300'+ movie.poster_path; /*Traendo las imagenes de cada pelicula*/
+    headerSection.style.background = `
+    linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.35) 19.27%,
+        rgba(0, 0, 0, 0) 29.17%
+    ),
+    url(${movieImgUrl})`
+    ; /* Mostrando la imagen la pelicula como poster con una pequeña sombra*/
+
+    movieDetailTitle.textContent = movie.title; /* Aparecera el nombre de la pelicula como titulo */
+    movieDetailDescription.textContent = movie.overview; /* Aparecera toda la descripcion de la pelicula */
+    movieDetailScore.textContent = movie.vote_average; /* Aparecera el promedio de la pelicula */
+
+    createCategories(movie.genres, movieDetailCategoriesList) /* Reutilizando la funcion createCategories, Esta funcion mostrara cuando estemos dentro de cada pelicula a que categoria pertenece */
 }
 
 async function getMoviesByCategory(id) {
